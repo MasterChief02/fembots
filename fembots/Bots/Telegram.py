@@ -24,12 +24,13 @@ class Telegram(Bot):
                 filters=dict(commands=[self.command]),
             )
             self.bot.add_message_handler(start_dict)
-            self.bot.polling()
+            self.bot.infinity_polling()
             return True
 
         except:
             return False
 
     def start_handler(self, message):
-        response = self.get_response_from_NLP()
+        response = self.get_response_from_NLP(message.text)
+        print(response)
         self.bot.reply_to(message, response)

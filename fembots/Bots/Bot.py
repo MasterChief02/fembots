@@ -53,7 +53,7 @@ class Bot:
         """
         pass
 
-    def get_response_from_NLP(message: str) -> str:
+    def get_response_from_NLP(self, message: str) -> str:
         """
         Function to retrieve response from NLP engine for a given message.
 
