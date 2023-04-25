@@ -52,3 +52,18 @@ class Bot:
         None
         """
         pass
+
+    def get_response_from_NLP(message: str) -> str:
+        """
+        Function to retrieve response from NLP engine for a given message.
+
+        Parameters
+        ----------
+        message: str
+            Message for which the response is to be fetched.
+
+        Return
+        ------
+        str: Response message from NLP engine.
+        """
+        return message

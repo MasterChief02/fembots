@@ -14,11 +14,22 @@ class Telegram(Bot):
         super().__init__(config)
 
         self.api_key = config.get("API_KEY", "")
+        self.command = config.get("command", "")
         self.bot = telebot.TeleBot(self.api_key)
 
-        @self.bot.message_handler(func=lambda m: True)
-        def respond_NLP_engine(self, message):
-            self.bot.reply_to(message, message.text)
-
     def start(self):
-        self.bot.infinity_polling()
+        try:
+            start_dict = dict(
+                function=lambda msg, obj=self: obj.start_handler(msg),
+                filters=dict(commands=[self.command]),
+            )
+            self.bot.add_message_handler(start_dict)
+            self.bot.polling()
+            return True
+
+        except:
+            return False
+
+    def start_handler(self, message):
+        response = self.get_response_from_NLP()
+        self.bot.reply_to(message, response)
