@@ -16,7 +16,7 @@ def book():
 def pay():
     try:
         data = dict(request.get_json())
-        return {"message": f"Payment mode confirmed"}, 201
+        return {"message": f"Payment mode confirmed {data['mode']}"}, 201
     except:
         return {"message": "Payment mode not confirmed"}, 415
 
