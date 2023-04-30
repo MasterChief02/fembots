@@ -31,8 +31,27 @@ class Bot_Manager:
             use_bot = self.config["DEFAULT"].get(config_attr, "no")
 
             if use_bot == "yes":
+                print("Telegram")
                 bot_config_attr = bot.name.upper()
                 config = self.config[bot_config_attr]
                 _bot = bot(config)
                 self.bots.append(_bot)
+
+    def start(self) -> bool:
+        """
+        Function to start the all the bots enabled.
+
+        Parameters
+        ----------
+        None
+
+        Return
+        ------
+        bool: Returns true if started successfully, false otherwise.
+        """
+        try:
+            for _bot in self.bots:
                 _bot.start()
+            return True
+        except:
+            return False

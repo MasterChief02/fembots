@@ -1,5 +1,9 @@
 import typing
 
+import json
+
+import requests
+
 
 class Bot:
     """Parent class for all kind of bots."""
@@ -66,4 +70,9 @@ class Bot:
         ------
         str: Response message from NLP engine.
         """
-        return message
+        headers = {"Content-Type": "application/json"}
+        data = {"message": message}
+        response = requests.post(self.api_endpoint, json.dumps(data), headers=headers)
+        return_data = dict(response.json())
+        return_message = str(return_data.get("message", "Sorry something went wrong"))
+        return return_message
